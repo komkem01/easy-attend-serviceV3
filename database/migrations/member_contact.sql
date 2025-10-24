@@ -1,0 +1,15 @@
+-- CREATE TABLE member_contact_phone
+-- (
+--     id                 UUID      NOT NULL,
+--     contact_channel_id VARCHAR   NOT NULL COMMENT 'รหัสเบอร์โทรศัพท์ *',
+--     member_id          VARCHAR   NOT NULL COMMENT 'รหัสสมาชิก (id) ',
+--     phone              VARCHAR   NULL     COMMENT 'เบอร์โทรศัพท์ *',
+--     is_main            BOOLEAN   NULL     COMMENT 'เบอร์โทรหลัก',
+--     remark             TEXT      NULL     COMMENT 'หมายเหตุ',
+--     files              JSONB     NULL     COMMENT 'ไฟล์ที่เกี่ยวข้อง',
+--     created_at         TIMESTAMP NULL     COMMENT 'วันที่สร้าง',
+--     updated_at         TIMESTAMP NULL     COMMENT 'วันที่แก้ไข',
+--     deleted_at         TIMESTAMP NULL     COMMENT 'วันที่ลบ',
+--     PRIMARY KEY (id)
+-- ) COMMENT 'ข้อมูลเบอร์โทรศัพท์ (สมาชิก) ';
+
