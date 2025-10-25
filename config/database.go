@@ -1,8 +1,8 @@
 package config
 
 import (
-	dbdto "mcop/internal/database/dto"
-	rddto "mcop/internal/redis/dto"
+	dbdto "github.com/easy-attend-serviceV3/internal/database/dto"
+	rddto "github.com/easy-attend-serviceV3/internal/redis/dto"
 )
 
 type Database struct {

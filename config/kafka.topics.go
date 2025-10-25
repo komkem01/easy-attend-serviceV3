@@ -1,6 +1,6 @@
 package config
 
-import "mcop/internal/kafka/dto"
+import "github.com/easy-attend-serviceV3/internal/kafka/dto"
 
 // Def.
 var kafka = dto.Kafka{

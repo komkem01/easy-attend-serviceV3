@@ -9,10 +9,10 @@ import (
 	"os"
 	"time"
 
-	"mcop/app/modules"
-	"mcop/internal/log"
-	"mcop/internal/provider"
-	"mcop/routes"
+	"github.com/easy-attend-serviceV3/app/modules"
+	"github.com/easy-attend-serviceV3/internal/log"
+	"github.com/easy-attend-serviceV3/internal/provider"
+	"github.com/easy-attend-serviceV3/routes"
 
 	"github.com/gin-contrib/pprof"
 	"github.com/gin-gonic/gin"

@@ -1,8 +1,8 @@
 package exampletwo
 
 import (
-	entitiesinf "mcop/app/modules/entities/inf"
-	configDTO "mcop/internal/config/dto"
+	entitiesinf "github.com/easy-attend-serviceV3/app/modules/entities/inf"
+	configDTO "github.com/easy-attend-serviceV3/internal/config/dto"
 )
 
 type (

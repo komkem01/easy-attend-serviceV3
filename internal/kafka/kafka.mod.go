@@ -1,7 +1,7 @@
 package kafka
 
 import (
-	dto "mcop/internal/kafka/dto"
+	dto "github.com/easy-attend-serviceV3/internal/kafka/dto"
 )
 
 type Module struct {

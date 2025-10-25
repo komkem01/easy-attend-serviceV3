@@ -3,8 +3,8 @@ package database
 import (
 	"context"
 
-	dto "mcop/internal/database/dto"
-	"mcop/internal/provider"
+	dto "github.com/easy-attend-serviceV3/internal/database/dto"
+	"github.com/easy-attend-serviceV3/internal/provider"
 )
 
 type DatabaseModule struct {

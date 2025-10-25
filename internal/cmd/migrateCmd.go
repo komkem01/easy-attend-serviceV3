@@ -3,12 +3,12 @@ package cmd
 import (
 	"strings"
 
-	appConf "mcop/config"
-	"mcop/database/migrations"
-	"mcop/internal/config"
-	configDTO "mcop/internal/config/dto"
-	"mcop/internal/database"
-	"mcop/internal/log"
+	appConf "github.com/easy-attend-serviceV3/config"
+	"github.com/easy-attend-serviceV3/database/migrations"
+	"github.com/easy-attend-serviceV3/internal/config"
+	configDTO "github.com/easy-attend-serviceV3/internal/config/dto"
+	"github.com/easy-attend-serviceV3/internal/database"
+	"github.com/easy-attend-serviceV3/internal/log"
 
 	"github.com/spf13/cobra"
 	"github.com/uptrace/bun/migrate"

@@ -4,16 +4,16 @@ import (
 	"log/slog"
 	"sync"
 
-	"mcop/internal/config"
-	configDTO "mcop/internal/config/dto"
-	"mcop/internal/database"
-	"mcop/internal/log"
-	"mcop/internal/otel/collector"
+	"github.com/easy-attend-serviceV3/internal/config"
+	configDTO "github.com/easy-attend-serviceV3/internal/config/dto"
+	"github.com/easy-attend-serviceV3/internal/database"
+	"github.com/easy-attend-serviceV3/internal/log"
+	"github.com/easy-attend-serviceV3/internal/otel/collector"
 
-	"mcop/app/modules/entities"
-	"mcop/app/modules/example"
-	exampletwo "mcop/app/modules/example-two"
-	appConf "mcop/config"
+	"github.com/easy-attend-serviceV3/app/modules/entities"
+	"github.com/easy-attend-serviceV3/app/modules/example"
+	exampletwo "github.com/easy-attend-serviceV3/app/modules/example-two"
+	appConf "github.com/easy-attend-serviceV3/config"
 	// "mcop/app/modules/kafka"
 )
 

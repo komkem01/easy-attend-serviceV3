@@ -5,7 +5,7 @@ import (
 	"log/slog"
 	"os"
 
-	configdto "mcop/internal/config/dto"
+	configdto "github.com/easy-attend-serviceV3/internal/config/dto"
 
 	"go.elastic.co/ecszap"
 	"go.opentelemetry.io/contrib/bridges/otelzap"

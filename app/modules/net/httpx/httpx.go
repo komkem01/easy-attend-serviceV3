@@ -9,7 +9,7 @@ import (
 	"net/http"
 	"time"
 
-	"mcop/app/utils/syncx"
+	"github.com/easy-attend-serviceV3/app/utils/syncx"
 
 	"go.opentelemetry.io/contrib/instrumentation/net/http/otelhttp"
 )

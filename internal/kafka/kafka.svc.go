@@ -11,11 +11,11 @@ import (
 	"strings"
 	"time"
 
-	"mcop/app/utils/syncx"
-	"mcop/internal/kafka/dto"
-	kafkainf "mcop/internal/kafka/inf"
-	"mcop/internal/log"
-	"mcop/internal/provider"
+	"github.com/easy-attend-serviceV3/app/utils/syncx"
+	"github.com/easy-attend-serviceV3/internal/kafka/dto"
+	kafkainf "github.com/easy-attend-serviceV3/internal/kafka/inf"
+	"github.com/easy-attend-serviceV3/internal/log"
+	"github.com/easy-attend-serviceV3/internal/provider"
 
 	"github.com/IBM/sarama"
 )

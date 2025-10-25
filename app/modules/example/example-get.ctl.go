@@ -1,9 +1,9 @@
 package example
 
 import (
-	"mcop/app/utils"
-	"mcop/app/utils/base"
-	"mcop/config/i18n"
+	"github.com/easy-attend-serviceV3/app/utils"
+	"github.com/easy-attend-serviceV3/app/utils/base"
+	"github.com/easy-attend-serviceV3/config/i18n"
 
 	"github.com/gin-gonic/gin"
 	"github.com/oklog/ulid/v2"

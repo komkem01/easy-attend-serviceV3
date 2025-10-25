@@ -3,7 +3,7 @@ package cmd
 import (
 	"fmt"
 
-	"mcop/internal/http"
+	"github.com/easy-attend-serviceV3/internal/http"
 
 	"github.com/spf13/cobra"
 )

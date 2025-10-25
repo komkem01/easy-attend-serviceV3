@@ -4,7 +4,7 @@ package utils
 import (
 	"context"
 
-	"mcop/internal/log"
+	"github.com/easy-attend-serviceV3/internal/log"
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/otel/trace"

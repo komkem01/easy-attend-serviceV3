@@ -1,9 +1,9 @@
 package example
 
 import (
-	"mcop/app/modules/net/httpx"
-	"mcop/app/utils"
-	"mcop/app/utils/base"
+	"github.com/easy-attend-serviceV3/app/modules/net/httpx"
+	"github.com/easy-attend-serviceV3/app/utils"
+	"github.com/easy-attend-serviceV3/app/utils/base"
 
 	"github.com/gin-gonic/gin"
 	"go.opentelemetry.io/otel/attribute"

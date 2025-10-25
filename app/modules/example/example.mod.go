@@ -1,9 +1,9 @@
 package example
 
 import (
-	entitiesinf "mcop/app/modules/entities/inf"
+	entitiesinf "github.com/easy-attend-serviceV3/app/modules/entities/inf"
 
-	configDTO "mcop/internal/config/dto"
+	configDTO "github.com/easy-attend-serviceV3/internal/config/dto"
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
@@ -16,7 +16,7 @@ type Module struct {
 }
 
 func New(conf *configDTO.Config[Config], db entitiesinf.ExampleEntity) *Module {
-	tracer := otel.Tracer("mcop.modules.example")
+	tracer := otel.Tracer("easy-attend-serviceV3.modules.example")
 	svc := newService(&Options{
 		Config: conf,
 		tracer: tracer,

@@ -1,9 +1,9 @@
 package example
 
 import (
-	entitiesinf "mcop/app/modules/entities/inf"
+	entitiesinf "github.com/easy-attend-serviceV3/app/modules/entities/inf"
 
-	configDTO "mcop/internal/config/dto"
+	configDTO "github.com/easy-attend-serviceV3/internal/config/dto"
 
 	"go.opentelemetry.io/otel/trace"
 )

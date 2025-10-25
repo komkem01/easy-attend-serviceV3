@@ -1,7 +1,7 @@
 package log
 
 import (
-	configdto "mcop/internal/config/dto"
+	configdto "github.com/easy-attend-serviceV3/internal/config/dto"
 )
 
 type Middleware struct {

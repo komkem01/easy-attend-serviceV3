@@ -3,7 +3,7 @@ package entitiesinf
 import (
 	"context"
 
-	"mcop/app/modules/entities/ent"
+	"github.com/easy-attend-serviceV3/app/modules/entities/ent"
 
 	"github.com/google/uuid"
 )
@@ -18,4 +18,20 @@ type ExampleEntity interface {
 }
 type ExampleTwoEntity interface {
 	CreateExampleTwo(ctx context.Context, userID uuid.UUID) (*ent.Example, error)
+}
+
+// student
+type StudentEntity interface {
+}
+
+// teacher
+type TeacherEntity interface {
+}
+
+// prefix
+type PrefixEntity interface {
+}
+
+// gender
+type GenderEntity interface {
 }

@@ -1,11 +1,10 @@
 package config
 
 import (
-	"mcop/app/modules/example"
-	exampletwo "mcop/app/modules/example-two"
-	"mcop/internal/kafka/dto"
-	"mcop/internal/log"
-	"mcop/internal/otel/collector"
+	"github.com/easy-attend-serviceV3/app/modules/example"
+	exampletwo "github.com/easy-attend-serviceV3/app/modules/example-two"
+	"github.com/easy-attend-serviceV3/internal/log"
+	"github.com/easy-attend-serviceV3/internal/otel/collector"
 )
 
 // Config is a struct that contains all the configuration of the application.
@@ -27,8 +26,8 @@ type Config struct {
 
 	Otel collector.Config
 
-	Kafka dto.Kafka
-	Log   log.Option
+	// Kafka dto.Kafka
+	Log log.Option
 
 	Example example.Config
 
@@ -37,7 +36,7 @@ type Config struct {
 
 var App = Config{
 	Database: database,
-	Kafka:    kafka,
+	// Kafka:    kafka,
 
 	AppName: "go_app",
 	Port:    8080,

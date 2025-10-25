@@ -3,8 +3,8 @@ package entities
 import (
 	"context"
 
-	"mcop/app/modules/entities/ent"
-	entitiesinf "mcop/app/modules/entities/inf"
+	"github.com/easy-attend-serviceV3/app/modules/entities/ent"
+	entitiesinf "github.com/easy-attend-serviceV3/app/modules/entities/inf"
 
 	"github.com/google/uuid"
 )
