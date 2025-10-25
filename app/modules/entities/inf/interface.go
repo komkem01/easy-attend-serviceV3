@@ -30,8 +30,12 @@ type TeacherEntity interface {
 
 // prefix
 type PrefixEntity interface {
+	GetListPrefix(ctx context.Context) ([]*ent.PrefixEntity, error)
+	GetByIDPrefix(ctx context.Context, id uuid.UUID) (*ent.PrefixEntity, error)
 }
 
 // gender
 type GenderEntity interface {
+	GetListGender(ctx context.Context) ([]*ent.GenderEntity, error)
+	GetByIDGender(ctx context.Context, id uuid.UUID) (*ent.GenderEntity, error)
 }

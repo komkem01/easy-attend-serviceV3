@@ -13,6 +13,8 @@ import (
 	"github.com/easy-attend-serviceV3/app/modules/entities"
 	"github.com/easy-attend-serviceV3/app/modules/example"
 	exampletwo "github.com/easy-attend-serviceV3/app/modules/example-two"
+	"github.com/easy-attend-serviceV3/app/modules/gender"
+	"github.com/easy-attend-serviceV3/app/modules/prefix"
 	appConf "github.com/easy-attend-serviceV3/config"
 	// "mcop/app/modules/kafka"
 )
@@ -26,6 +28,9 @@ type Modules struct {
 	// Kafka *kafka.Module
 	Example  *example.Module
 	Example2 *exampletwo.Module
+
+	Gender *gender.Module
+	Prefix *prefix.Module
 }
 
 func modulesInit() {
@@ -49,6 +54,12 @@ func modulesInit() {
 	exampleMod2 := exampletwo.New(configDTO.Conf[exampletwo.Config](confMod.Svc), entitiesMod.Svc)
 	log.Infof("example module initialized")
 
+	genderMod := gender.New(entitiesMod.Svc)
+	log.Infof("gender module initialized")
+
+	prefixMod := prefix.New(entitiesMod.Svc)
+	log.Infof("prefix module initialized")
+
 	// kafka := kafka.New(&conf.Kafka)
 	// log.Infof("kafka module initialized")
 
@@ -60,6 +71,8 @@ func modulesInit() {
 		ENT:      entitiesMod,
 		Example:  exampleMod,
 		Example2: exampleMod2,
+		Gender:   genderMod,
+		Prefix:   prefixMod,
 	}
 
 	log.Infof("all modules initialized")

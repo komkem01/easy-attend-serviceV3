@@ -2,8 +2,9 @@ package routes
 
 import (
 	"fmt"
-	"github.com/easy-attend-serviceV3/app/modules"
 	"net/http"
+
+	"github.com/easy-attend-serviceV3/app/modules"
 
 	"github.com/gin-gonic/gin"
 )
@@ -16,4 +17,12 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 	r.GET("/example/:id", mod.Example.Ctl.Get)
 	r.GET("/example-http", mod.Example.Ctl.GetHttpReq)
 	r.POST("/example", mod.Example.Ctl.Create)
+
+	// Gender routes
+	r.GET("/gender", mod.Gender.Ctl.ListController)
+	r.GET("/gender/:id", mod.Gender.Ctl.InfoController)
+
+	// Prefix routes
+	r.GET("/prefix", mod.Prefix.Ctl.ListController)
+	r.GET("/prefix/:id", mod.Prefix.Ctl.InfoController)
 }

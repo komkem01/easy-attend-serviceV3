@@ -2,3 +2,4 @@ success: Success
 internal-error: Internal server error
 invalid-request-form: Invalid request form
 example-message-ok: Example message ok
+bad-request: Bad request
