@@ -32,4 +32,12 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 	r.POST("/school", mod.School.Ctl.CreateController)
 	r.PATCH("/school/:id", mod.School.Ctl.UpdateController)
 	r.DELETE("/school/:id", mod.School.Ctl.DeleteController)
+
+	// Classroom routes
+	r.GET("/classroom", mod.Classroom.Ctl.ListController)
+	r.GET("/classroom/:id", mod.Classroom.Ctl.InfoController)
+	r.POST("/classroom", mod.Classroom.Ctl.CreateController)
+	r.PATCH("/classroom/:id", mod.Classroom.Ctl.UpdateController)
+	r.DELETE("/classroom/:id", mod.Classroom.Ctl.DeleteController)
+
 }

@@ -49,3 +49,13 @@ type SchoolEntity interface {
 	DeleteSchool(ctx context.Context, id uuid.UUID) error
 	CheckExistSchool(ctx context.Context, id uuid.UUID) (bool, error)
 }
+
+// classroom
+type ClassroomEntity interface {
+	GetListClassroom(ctx context.Context) ([]*ent.ClassroomEntity, error)
+	GetByIDClassroom(ctx context.Context, id uuid.UUID) (*ent.ClassroomEntity, error)
+	CreateClassroom(ctx context.Context, schoolID uuid.UUID, name string) (*ent.ClassroomEntity, error)
+	UpdateClassroom(ctx context.Context, id uuid.UUID, schoolID uuid.UUID, name string) (*ent.ClassroomEntity, error)
+	DeleteClassroom(ctx context.Context, id uuid.UUID) error
+	CheckExistClassroom(ctx context.Context, id uuid.UUID) (bool, error)
+}

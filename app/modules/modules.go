@@ -10,6 +10,7 @@ import (
 	"github.com/easy-attend-serviceV3/internal/log"
 	"github.com/easy-attend-serviceV3/internal/otel/collector"
 
+	"github.com/easy-attend-serviceV3/app/modules/classroom"
 	"github.com/easy-attend-serviceV3/app/modules/entities"
 	"github.com/easy-attend-serviceV3/app/modules/example"
 	exampletwo "github.com/easy-attend-serviceV3/app/modules/example-two"
@@ -30,9 +31,10 @@ type Modules struct {
 	Example  *example.Module
 	Example2 *exampletwo.Module
 
-	Gender *gender.Module
-	Prefix *prefix.Module
-	School *school.Module
+	Gender    *gender.Module
+	Prefix    *prefix.Module
+	School    *school.Module
+	Classroom *classroom.Module
 }
 
 func modulesInit() {
@@ -65,20 +67,24 @@ func modulesInit() {
 	schoolMod := school.New(entitiesMod.Svc)
 	log.Infof("school module initialized")
 
+	classroomMod := classroom.New(entitiesMod.Svc)
+	log.Infof("classroom module initialized")
+
 	// kafka := kafka.New(&conf.Kafka)
 	// log.Infof("kafka module initialized")
 
 	mod = &Modules{
-		Conf:     confMod,
-		Log:      logMod,
-		OTEL:     otel,
-		DB:       db,
-		ENT:      entitiesMod,
-		Example:  exampleMod,
-		Example2: exampleMod2,
-		Gender:   genderMod,
-		Prefix:   prefixMod,
-		School:   schoolMod,
+		Conf:      confMod,
+		Log:       logMod,
+		OTEL:      otel,
+		DB:        db,
+		ENT:       entitiesMod,
+		Example:   exampleMod,
+		Example2:  exampleMod2,
+		Gender:    genderMod,
+		Prefix:    prefixMod,
+		School:    schoolMod,
+		Classroom: classroomMod,
 	}
 
 	log.Infof("all modules initialized")
