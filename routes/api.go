@@ -25,4 +25,11 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 	// Prefix routes
 	r.GET("/prefix", mod.Prefix.Ctl.ListController)
 	r.GET("/prefix/:id", mod.Prefix.Ctl.InfoController)
+
+	// School routes
+	r.GET("/school", mod.School.Ctl.ListController)
+	r.GET("/school/:id", mod.School.Ctl.InfoController)
+	r.POST("/school", mod.School.Ctl.CreateController)
+	r.PATCH("/school/:id", mod.School.Ctl.UpdateController)
+	r.DELETE("/school/:id", mod.School.Ctl.DeleteController)
 }

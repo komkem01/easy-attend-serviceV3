@@ -39,3 +39,13 @@ type GenderEntity interface {
 	GetListGender(ctx context.Context) ([]*ent.GenderEntity, error)
 	GetByIDGender(ctx context.Context, id uuid.UUID) (*ent.GenderEntity, error)
 }
+
+// school
+type SchoolEntity interface {
+	GetListSchool(ctx context.Context) ([]*ent.SchoolEntity, error)
+	GetByIDSchool(ctx context.Context, id uuid.UUID) (*ent.SchoolEntity, error)
+	CreateSchool(ctx context.Context, name, address, phone string) (*ent.SchoolEntity, error)
+	UpdateSchool(ctx context.Context, id uuid.UUID, name, address, phone string) (*ent.SchoolEntity, error)
+	DeleteSchool(ctx context.Context, id uuid.UUID) error
+	CheckExistSchool(ctx context.Context, id uuid.UUID) (bool, error)
+}

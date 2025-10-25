@@ -14,7 +14,8 @@ type ErrorMapping struct {
 
 // Use error.Error() as key of map for error mappings
 var errorMappings = map[string]ErrorMapping{
-	i18n.BadRequest: {i18n.BadRequest, BadRequest},
+	i18n.BadRequest:        {i18n.BadRequest, BadRequest},
+	i18n.InternalServerError: {i18n.InternalServerError, InternalServerError},
 }
 
 func HandleError(ctx *gin.Context, err error) {

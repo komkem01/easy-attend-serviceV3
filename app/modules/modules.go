@@ -15,6 +15,7 @@ import (
 	exampletwo "github.com/easy-attend-serviceV3/app/modules/example-two"
 	"github.com/easy-attend-serviceV3/app/modules/gender"
 	"github.com/easy-attend-serviceV3/app/modules/prefix"
+	"github.com/easy-attend-serviceV3/app/modules/school"
 	appConf "github.com/easy-attend-serviceV3/config"
 	// "mcop/app/modules/kafka"
 )
@@ -31,6 +32,7 @@ type Modules struct {
 
 	Gender *gender.Module
 	Prefix *prefix.Module
+	School *school.Module
 }
 
 func modulesInit() {
@@ -60,6 +62,9 @@ func modulesInit() {
 	prefixMod := prefix.New(entitiesMod.Svc)
 	log.Infof("prefix module initialized")
 
+	schoolMod := school.New(entitiesMod.Svc)
+	log.Infof("school module initialized")
+
 	// kafka := kafka.New(&conf.Kafka)
 	// log.Infof("kafka module initialized")
 
@@ -73,6 +78,7 @@ func modulesInit() {
 		Example2: exampleMod2,
 		Gender:   genderMod,
 		Prefix:   prefixMod,
+		School:   schoolMod,
 	}
 
 	log.Infof("all modules initialized")
