@@ -10,7 +10,9 @@ import (
 	"github.com/easy-attend-serviceV3/internal/log"
 	"github.com/easy-attend-serviceV3/internal/otel/collector"
 
+	"github.com/easy-attend-serviceV3/app/modules/attendance"
 	"github.com/easy-attend-serviceV3/app/modules/classroom"
+	classroommember "github.com/easy-attend-serviceV3/app/modules/classroom_member"
 	"github.com/easy-attend-serviceV3/app/modules/entities"
 	"github.com/easy-attend-serviceV3/app/modules/example"
 	exampletwo "github.com/easy-attend-serviceV3/app/modules/example-two"
@@ -33,12 +35,14 @@ type Modules struct {
 	Example  *example.Module
 	Example2 *exampletwo.Module
 
-	Gender    *gender.Module
-	Prefix    *prefix.Module
-	School    *school.Module
-	Classroom *classroom.Module
-	Student   *student.Module
-	Teacher   *teacher.Module
+	Gender          *gender.Module
+	Prefix          *prefix.Module
+	School          *school.Module
+	Classroom       *classroom.Module
+	ClassroomMember *classroommember.Module
+	Student         *student.Module
+	Teacher         *teacher.Module
+	Attendance      *attendance.Module
 }
 
 func modulesInit() {
@@ -74,29 +78,37 @@ func modulesInit() {
 	classroomMod := classroom.New(entitiesMod.Svc)
 	log.Infof("classroom module initialized")
 
+	classroomMemberMod := classroommember.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
+	log.Infof("classroom member module initialized")
+
 	studentMod := student.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
 	log.Infof("student module initialized")
 
 	teacherMod := teacher.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
 	log.Infof("teacher module initialized")
 
+	attendanceMod := attendance.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
+	log.Infof("attendance module initialized")
+
 	// kafka := kafka.New(&conf.Kafka)
 	// log.Infof("kafka module initialized")
 
 	mod = &Modules{
-		Conf:      confMod,
-		Log:       logMod,
-		OTEL:      otel,
-		DB:        db,
-		ENT:       entitiesMod,
-		Example:   exampleMod,
-		Example2:  exampleMod2,
-		Gender:    genderMod,
-		Prefix:    prefixMod,
-		School:    schoolMod,
-		Classroom: classroomMod,
-		Student:   studentMod,
-		Teacher:   teacherMod,
+		Conf:            confMod,
+		Log:             logMod,
+		OTEL:            otel,
+		DB:              db,
+		ENT:             entitiesMod,
+		Example:         exampleMod,
+		Example2:        exampleMod2,
+		Gender:          genderMod,
+		Prefix:          prefixMod,
+		School:          schoolMod,
+		Classroom:       classroomMod,
+		ClassroomMember: classroomMemberMod,
+		Student:         studentMod,
+		Teacher:         teacherMod,
+		Attendance:      attendanceMod,
 	}
 
 	log.Infof("all modules initialized")

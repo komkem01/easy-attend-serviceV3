@@ -41,6 +41,13 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 	r.PATCH("/classroom/:id", mod.Classroom.Ctl.UpdateController)
 	r.DELETE("/classroom/:id", mod.Classroom.Ctl.DeleteController)
 
+	// Classroom Member routes
+	r.GET("/classroom-member", mod.ClassroomMember.Ctl.ListController)
+	r.GET("/classroom-member/:id", mod.ClassroomMember.Ctl.InfoController)
+	r.POST("/classroom-member", mod.ClassroomMember.Ctl.CreateController)
+	r.PATCH("/classroom-member/:id", mod.ClassroomMember.Ctl.UpdateController)
+	r.DELETE("/classroom-member/:id", mod.ClassroomMember.Ctl.DeleteController)
+
 	// Student routes
 	r.GET("/student", mod.Student.Ctl.ListController)
 	r.GET("/student/:id", mod.Student.Ctl.InfoController)
@@ -61,5 +68,12 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 		teacherProtected.PATCH("/:id", mod.Teacher.Ctl.UpdateController)
 		teacherProtected.DELETE("/:id", mod.Teacher.Ctl.DeleteController)
 	}
+
+	// Attendance routes
+	r.GET("/attendance", mod.Attendance.Ctl.ListController)
+	r.GET("/attendance/:id", mod.Attendance.Ctl.InfoController)
+	r.POST("/attendance", mod.Attendance.Ctl.CreateController)
+	r.PATCH("/attendance/:id", mod.Attendance.Ctl.UpdateController)
+	r.DELETE("/attendance/:id", mod.Attendance.Ctl.DeleteController)
 
 }

@@ -72,3 +72,28 @@ type ClassroomEntity interface {
 	DeleteClassroom(ctx context.Context, id uuid.UUID) error
 	CheckExistClassroom(ctx context.Context, id uuid.UUID) (bool, error)
 }
+
+// classroom member
+type ClassroomMemberEntity interface {
+	CreateClassroomMember(ctx context.Context, req *entitiesdto.ClassroomMemberCreateRequest) (*ent.ClassroomMemberEntity, error)
+	GetListClassroomMember(ctx context.Context, classroomID uuid.UUID) ([]*ent.ClassroomMemberEntity, error)
+	GetAllClassroomMembers(ctx context.Context, limit int) ([]*ent.ClassroomMemberEntity, error)
+	GetClassroomMemberByID(ctx context.Context, id uuid.UUID) (*ent.ClassroomMemberEntity, error)
+	UpdateClassroomMember(ctx context.Context, id uuid.UUID, req *entitiesdto.ClassroomMemberUpdateRequest) (*ent.ClassroomMemberEntity, error)
+	DeleteClassroomMember(ctx context.Context, id uuid.UUID) error
+	CheckExistClassroomMember(ctx context.Context, id uuid.UUID) (bool, error)
+	GetClassroomMembersByStudentID(ctx context.Context, studentID uuid.UUID) ([]*ent.ClassroomMemberEntity, error)
+}
+
+// Attendance
+type AttendanceEntity interface {
+	CreateAttendance(ctx context.Context, req *entitiesdto.AttendanceCreateRequest) (*ent.AttendanceEntity, error)
+	GetListAttendance(ctx context.Context, classroomID uuid.UUID, date string) ([]*ent.AttendanceEntity, error)
+	GetAllAttendance(ctx context.Context, limit int) ([]*ent.AttendanceEntity, error)
+	GetAttendanceByID(ctx context.Context, id uuid.UUID) (*ent.AttendanceEntity, error)
+	UpdateAttendance(ctx context.Context, id uuid.UUID, req *entitiesdto.AttendanceUpdateRequest) (*ent.AttendanceEntity, error)
+	DeleteAttendance(ctx context.Context, id uuid.UUID) error
+	CheckExistAttendance(ctx context.Context, id uuid.UUID) (bool, error)
+	GetAttendanceByStudentID(ctx context.Context, studentID uuid.UUID, date string) (*ent.AttendanceEntity, error)
+	GetAttendanceByClassroomAndDate(ctx context.Context, classroomID uuid.UUID, date string) ([]*ent.AttendanceEntity, error)
+}
