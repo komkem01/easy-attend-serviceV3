@@ -58,6 +58,8 @@ type SchoolEntity interface {
 	GetListSchool(ctx context.Context) ([]*ent.SchoolEntity, error)
 	GetSchoolsByTeacherID(ctx context.Context, teacherID uuid.UUID) ([]*ent.SchoolEntity, error)
 	GetByIDSchool(ctx context.Context, id uuid.UUID) (*ent.SchoolEntity, error)
+	GetSchoolByName(ctx context.Context, name string) (*ent.SchoolEntity, error)
+	FindOrCreateSchoolByName(ctx context.Context, name string) (*ent.SchoolEntity, error)
 	CreateSchool(ctx context.Context, name, address, phone string) (*ent.SchoolEntity, error)
 	UpdateSchool(ctx context.Context, id uuid.UUID, name, address, phone string) (*ent.SchoolEntity, error)
 	DeleteSchool(ctx context.Context, id uuid.UUID) error

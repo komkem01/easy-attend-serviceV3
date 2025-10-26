@@ -10,15 +10,15 @@ import (
 )
 
 type UpdateServiceRequest struct {
-	ID          uuid.UUID `json:"id"`
-	SchoolID    uuid.UUID `json:"school_id"`
-	ClassroomID uuid.UUID `json:"classroom_id"`
-	PrefixID    uuid.UUID `json:"prefix_id"`
-	GenderID    uuid.UUID `json:"gender_id"`
-	FirstName   string    `json:"first_name"`
-	LastName    string    `json:"last_name"`
-	Email       string    `json:"email"`
-	Phone       string    `json:"phone"`
+	ID          uuid.UUID  `json:"id"`
+	SchoolID    uuid.UUID  `json:"school_id"`
+	ClassroomID *uuid.UUID `json:"classroom_id,omitempty"` // ใช้ pointer เพื่อรองรับ NULL
+	PrefixID    uuid.UUID  `json:"prefix_id"`
+	GenderID    uuid.UUID  `json:"gender_id"`
+	FirstName   string     `json:"first_name"`
+	LastName    string     `json:"last_name"`
+	Email       string     `json:"email"`
+	Phone       string     `json:"phone"`
 }
 
 func (s *Service) UpdateService(ctx context.Context, req *UpdateServiceRequest) error {

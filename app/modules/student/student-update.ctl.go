@@ -10,7 +10,7 @@ import (
 
 type UpdateControllerRequest struct {
 	SchoolID    string `json:"school_id" binding:"required"`
-	ClassroomID string `json:"classroom_id" binding:"required"`
+	ClassroomID string `json:"classroom_id"` // ไม่บังคับกรอก
 	PrefixID    string `json:"prefix_id" binding:"required"`
 	GenderID    string `json:"gender_id" binding:"required"`
 	StudentCode string `json:"student_code" binding:"required"`
@@ -44,11 +44,16 @@ func (c *Controller) UpdateController(ctx *gin.Context) {
 		base.BadRequest(ctx, i18n.BadRequest, nil)
 		return
 	}
-	classroomID, err := uuid.Parse(request.ClassroomID)
-	if err != nil {
-		base.BadRequest(ctx, i18n.BadRequest, nil)
-		return
+
+	var classroomID uuid.UUID
+	if request.ClassroomID != "" {
+		classroomID, err = uuid.Parse(request.ClassroomID)
+		if err != nil {
+			base.BadRequest(ctx, i18n.BadRequest, nil)
+			return
+		}
 	}
+
 	prefixID, err := uuid.Parse(request.PrefixID)
 	if err != nil {
 		base.BadRequest(ctx, i18n.BadRequest, nil)

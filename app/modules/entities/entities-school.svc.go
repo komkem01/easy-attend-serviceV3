@@ -43,6 +43,33 @@ func (s *Service) GetByIDSchool(ctx context.Context, id uuid.UUID) (*ent.SchoolE
 	return &school, nil
 }
 
+func (s *Service) GetSchoolByName(ctx context.Context, name string) (*ent.SchoolEntity, error) {
+	var school ent.SchoolEntity
+	err := s.db.NewSelect().Model(&school).Where("name = ?", name).Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return &school, nil
+}
+
+func (s *Service) FindOrCreateSchoolByName(ctx context.Context, name string) (*ent.SchoolEntity, error) {
+	// ลองหาโรงเรียนที่มีชื่อนี้อยู่แล้ว
+	school, err := s.GetSchoolByName(ctx, name)
+	if err == nil {
+		// พบโรงเรียนแล้ว ส่งกลับ
+		return school, nil
+	}
+
+	// ไม่พบโรงเรียน สร้างใหม่
+	// ใช้ข้อมูลเริ่มต้นสำหรับ address และ phone
+	newSchool, createErr := s.CreateSchool(ctx, name, "", "")
+	if createErr != nil {
+		return nil, fmt.Errorf("failed to create school: %w", createErr)
+	}
+
+	return newSchool, nil
+}
+
 func (s *Service) CreateSchool(ctx context.Context, name, address, phone string) (*ent.SchoolEntity, error) {
 	school := &ent.SchoolEntity{
 		ID:      uuid.New(),

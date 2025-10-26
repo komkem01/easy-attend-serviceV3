@@ -19,7 +19,7 @@ func (s *Service) CreateTeacher(ctx context.Context, req *entitiesdto.TeacherCre
 	teacher := &ent.TeacherEntity{
 		ID:          teacherID,
 		SchoolID:    req.SchoolID,
-		ClassroomID: req.ClassroomID,
+		ClassroomID: req.ClassroomID, // ตอนนี้เป็น pointer แล้ว
 		PrefixID:    req.PrefixID,
 		GenderID:    req.GenderID,
 		FirstName:   req.FirstName,

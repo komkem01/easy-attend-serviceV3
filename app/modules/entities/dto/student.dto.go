@@ -5,7 +5,7 @@ import "github.com/google/uuid"
 type StudentListResponse struct {
 	ID          uuid.UUID `json:"id"`
 	School      uuid.UUID `json:"school_id"`
-	Classroom   uuid.UUID `json:"classroom_id"`
+	Classroom   uuid.UUID `json:"classroom_id"` // จะใช้ uuid.Nil สำหรับกรณีที่ไม่มีค่า
 	Prefix      uuid.UUID `json:"prefix_id"`
 	Gender      uuid.UUID `json:"gender_id"`
 	StudentCode string    `json:"student_code"`
@@ -28,7 +28,7 @@ type StudentInfoResponse struct {
 
 type StudentCreateRequest struct {
 	School      uuid.UUID `json:"school_id" validate:"required"`
-	Classroom   uuid.UUID `json:"classroom_id" validate:"required"`
+	Classroom   uuid.UUID `json:"classroom_id"` // ไม่บังคับ - จะใช้ uuid.Nil สำหรับกรณีที่ไม่มีค่า
 	Prefix      uuid.UUID `json:"prefix_id" validate:"required"`
 	Gender      uuid.UUID `json:"gender_id" validate:"required"`
 	StudentCode string    `json:"student_code" validate:"required"`
@@ -39,7 +39,7 @@ type StudentCreateRequest struct {
 
 type StudentUpdateRequest struct {
 	School      uuid.UUID `json:"school_id" validate:"required"`
-	Classroom   uuid.UUID `json:"classroom_id" validate:"required"`
+	Classroom   uuid.UUID `json:"classroom_id"` // ไม่บังคับ - จะใช้ uuid.Nil สำหรับกรณีที่ไม่มีค่า
 	Prefix      uuid.UUID `json:"prefix_id" validate:"required"`
 	Gender      uuid.UUID `json:"gender_id" validate:"required"`
 	StudentCode string    `json:"student_code" validate:"required"`

@@ -45,13 +45,14 @@ func (c *Controller) UpdateController(ctx *gin.Context) {
 		return
 	}
 
-	var classroomID uuid.UUID
+	var classroomIDPtr *uuid.UUID
 	if request.ClassroomID != "" {
-		classroomID, err = uuid.Parse(request.ClassroomID)
+		classroomID, err := uuid.Parse(request.ClassroomID)
 		if err != nil {
 			base.BadRequest(ctx, i18n.BadRequest, nil)
 			return
 		}
+		classroomIDPtr = &classroomID
 	}
 
 	prefixID, err := uuid.Parse(request.PrefixID)
@@ -69,7 +70,7 @@ func (c *Controller) UpdateController(ctx *gin.Context) {
 	if err := c.svc.UpdateService(ctx.Request.Context(), &UpdateServiceRequest{
 		ID:          id,
 		SchoolID:    schoolID,
-		ClassroomID: classroomID,
+		ClassroomID: classroomIDPtr,
 		PrefixID:    prefixID,
 		GenderID:    genderID,
 		FirstName:   request.FirstName,

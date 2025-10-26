@@ -7,28 +7,28 @@ import (
 )
 
 type TeacherCreateRequest struct {
-	SchoolID    uuid.UUID `json:"school_id"`
-	ClassroomID uuid.UUID `json:"classroom_id"`
-	PrefixID    uuid.UUID `json:"prefix_id"`
-	GenderID    uuid.UUID `json:"gender_id"`
-	FirstName   string    `json:"first_name"`
-	LastName    string    `json:"last_name"`
-	Email       string    `json:"email"`
-	Password    string    `json:"password"`
-	Phone       string    `json:"phone"`
+	SchoolID    uuid.UUID  `json:"school_id"`
+	ClassroomID *uuid.UUID `json:"classroom_id,omitempty"` // ใช้ pointer เพื่อรองรับ NULL
+	PrefixID    uuid.UUID  `json:"prefix_id"`
+	GenderID    uuid.UUID  `json:"gender_id"`
+	FirstName   string     `json:"first_name"`
+	LastName    string     `json:"last_name"`
+	Email       string     `json:"email"`
+	Password    string     `json:"password"`
+	Phone       string     `json:"phone"`
 }
 
 type TeacherUpdateRequest struct {
-	ID          uuid.UUID `json:"id"`
-	SchoolID    uuid.UUID `json:"school_id"`
-	ClassroomID uuid.UUID `json:"classroom_id"`
-	PrefixID    uuid.UUID `json:"prefix_id"`
-	GenderID    uuid.UUID `json:"gender_id"`
-	FirstName   string    `json:"first_name"`
-	LastName    string    `json:"last_name"`
-	Email       string    `json:"email"`
-	Password    string    `json:"password"`
-	Phone       string    `json:"phone"`
+	ID          uuid.UUID  `json:"id"`
+	SchoolID    uuid.UUID  `json:"school_id"`
+	ClassroomID *uuid.UUID `json:"classroom_id,omitempty"` // ใช้ pointer เพื่อรองรับ NULL
+	PrefixID    uuid.UUID  `json:"prefix_id"`
+	GenderID    uuid.UUID  `json:"gender_id"`
+	FirstName   string     `json:"first_name"`
+	LastName    string     `json:"last_name"`
+	Email       string     `json:"email"`
+	Password    string     `json:"password"`
+	Phone       string     `json:"phone"`
 }
 
 type TeacherInfoResponse struct {

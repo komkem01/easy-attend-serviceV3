@@ -10,7 +10,7 @@ import (
 
 type CreateServiceRequest struct {
 	SchoolID    uuid.UUID
-	ClassroomID uuid.UUID
+	ClassroomID uuid.UUID // จะใช้ uuid.Nil สำหรับกรณีที่ไม่มีค่า
 	GenderID    uuid.UUID
 	PrefixID    uuid.UUID
 	StudentCode string
@@ -22,7 +22,7 @@ type CreateServiceRequest struct {
 type CreateServiceResponse struct {
 	ID          uuid.UUID `json:"id"`
 	SchoolID    uuid.UUID `json:"school_id"`
-	ClassroomID uuid.UUID `json:"classroom_id"`
+	ClassroomID uuid.UUID `json:"classroom_id"` // จะใช้ uuid.Nil สำหรับกรณีที่ไม่มีค่า
 	PrefixID    uuid.UUID `json:"prefix_id"`
 	GenderID    uuid.UUID `json:"gender_id"`
 	StudentCode string    `json:"student_code"`

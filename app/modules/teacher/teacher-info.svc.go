@@ -14,21 +14,21 @@ type InfoServiceRequest struct {
 }
 
 type InfoServiceResponse struct {
-	ID            uuid.UUID `json:"id"`
-	SchoolID      uuid.UUID `json:"school_id"`
-	SchoolName    string    `json:"school_name"`
-	ClassroomID   uuid.UUID `json:"classroom_id"`
-	ClassroomName string    `json:"classroom_name"`
-	PrefixID      uuid.UUID `json:"prefix_id"`
-	PrefixName    string    `json:"prefix_name"`
-	GenderID      uuid.UUID `json:"gender_id"`
-	GenderName    string    `json:"gender_name"`
-	FirstName     string    `json:"first_name"`
-	LastName      string    `json:"last_name"`
-	Email         string    `json:"email"`
-	Phone         string    `json:"phone"`
-	CreatedAt     time.Time `json:"created_at"`
-	UpdatedAt     time.Time `json:"updated_at"`
+	ID            uuid.UUID  `json:"id"`
+	SchoolID      uuid.UUID  `json:"school_id"`
+	SchoolName    string     `json:"school_name"`
+	ClassroomID   *uuid.UUID `json:"classroom_id,omitempty"`   // อาจเป็น null
+	ClassroomName *string    `json:"classroom_name,omitempty"` // อาจเป็น null
+	PrefixID      uuid.UUID  `json:"prefix_id"`
+	PrefixName    string     `json:"prefix_name"`
+	GenderID      uuid.UUID  `json:"gender_id"`
+	GenderName    string     `json:"gender_name"`
+	FirstName     string     `json:"first_name"`
+	LastName      string     `json:"last_name"`
+	Email         string     `json:"email"`
+	Phone         string     `json:"phone"`
+	CreatedAt     time.Time  `json:"created_at"`
+	UpdatedAt     time.Time  `json:"updated_at"`
 }
 
 func (s *Service) InfoService(ctx context.Context, req *InfoServiceRequest) (*InfoServiceResponse, error) {
@@ -47,10 +47,17 @@ func (s *Service) InfoService(ctx context.Context, req *InfoServiceRequest) (*In
 		return nil, err
 	}
 
-	classroomData, err := s.dbClassroom.GetByIDClassroom(ctx, data.ClassroomID)
-	if err != nil {
-		log.With(slog.Any(`classroom_id`, data.ClassroomID)).Error(err)
-		return nil, err
+	// จัดการ classroom data (อาจเป็น null)
+	var classroomIDPtr *uuid.UUID
+	var classroomNamePtr *string
+	if data.ClassroomID != nil {
+		classroomData, err := s.dbClassroom.GetByIDClassroom(ctx, *data.ClassroomID)
+		if err != nil {
+			log.With(slog.Any(`classroom_id`, *data.ClassroomID)).Error(err)
+			return nil, err
+		}
+		classroomIDPtr = &classroomData.ID
+		classroomNamePtr = &classroomData.Name
 	}
 
 	prefixData, err := s.dbPrefix.GetByIDPrefix(ctx, data.PrefixID)
@@ -69,8 +76,8 @@ func (s *Service) InfoService(ctx context.Context, req *InfoServiceRequest) (*In
 		ID:            data.ID,
 		SchoolID:      data.SchoolID,
 		SchoolName:    schoolData.Name,
-		ClassroomID:   data.ClassroomID,
-		ClassroomName: classroomData.Name,
+		ClassroomID:   classroomIDPtr,
+		ClassroomName: classroomNamePtr,
 		PrefixID:      data.PrefixID,
 		PrefixName:    prefixData.Name,
 		GenderID:      data.GenderID,

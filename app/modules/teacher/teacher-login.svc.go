@@ -16,19 +16,19 @@ type LoginServiceRequest struct {
 }
 
 type LoginServiceResponse struct {
-	ID           uuid.UUID `json:"id"`
-	SchoolID     uuid.UUID `json:"school_id"`
-	ClassroomID  uuid.UUID `json:"classroom_id"`
-	PrefixID     uuid.UUID `json:"prefix_id"`
-	GenderID     uuid.UUID `json:"gender_id"`
-	FirstName    string    `json:"first_name"`
-	LastName     string    `json:"last_name"`
-	Email        string    `json:"email"`
-	Phone        string    `json:"phone"`
-	AccessToken  string    `json:"access_token"`
-	RefreshToken string    `json:"refresh_token"`
-	TokenType    string    `json:"token_type"`
-	ExpiresAt    time.Time `json:"expires_at"`
+	ID           uuid.UUID  `json:"id"`
+	SchoolID     uuid.UUID  `json:"school_id"`
+	ClassroomID  *uuid.UUID `json:"classroom_id,omitempty"` // ใช้ pointer เพื่อรองรับ NULL
+	PrefixID     uuid.UUID  `json:"prefix_id"`
+	GenderID     uuid.UUID  `json:"gender_id"`
+	FirstName    string     `json:"first_name"`
+	LastName     string     `json:"last_name"`
+	Email        string     `json:"email"`
+	Phone        string     `json:"phone"`
+	AccessToken  string     `json:"access_token"`
+	RefreshToken string     `json:"refresh_token"`
+	TokenType    string     `json:"token_type"`
+	ExpiresAt    time.Time  `json:"expires_at"`
 }
 
 func (s *Service) LoginService(ctx context.Context, req *LoginServiceRequest) (*LoginServiceResponse, error) {
@@ -71,7 +71,7 @@ func (s *Service) LoginService(ctx context.Context, req *LoginServiceRequest) (*
 	response := &LoginServiceResponse{
 		ID:           teacher.ID,
 		SchoolID:     teacher.SchoolID,
-		ClassroomID:  teacher.ClassroomID,
+		ClassroomID:  teacher.ClassroomID, // teacher.ClassroomID เป็น pointer อยู่แล้ว
 		PrefixID:     teacher.PrefixID,
 		GenderID:     teacher.GenderID,
 		FirstName:    teacher.FirstName,

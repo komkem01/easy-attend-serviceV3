@@ -16,17 +16,17 @@ type ListServiceRequest struct {
 }
 
 type ListServiceResponse struct {
-	ID          uuid.UUID `json:"id"`
-	SchoolID    uuid.UUID `json:"school_id"`
-	ClassroomID uuid.UUID `json:"classroom_id"`
-	PrefixID    uuid.UUID `json:"prefix_id"`
-	GenderID    uuid.UUID `json:"gender_id"`
-	StudentCode string    `json:"student_code"`
-	FirstName   string    `json:"first_name"`
-	LastName    string    `json:"last_name"`
-	Phone       string    `json:"phone"`
-	CreatedAt   time.Time `json:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at"`
+	ID          uuid.UUID  `json:"id"`
+	SchoolID    uuid.UUID  `json:"school_id"`
+	ClassroomID *uuid.UUID `json:"classroom_id,omitempty"` // อาจเป็น null
+	PrefixID    uuid.UUID  `json:"prefix_id"`
+	GenderID    uuid.UUID  `json:"gender_id"`
+	StudentCode string     `json:"student_code"`
+	FirstName   string     `json:"first_name"`
+	LastName    string     `json:"last_name"`
+	Phone       string     `json:"phone"`
+	CreatedAt   time.Time  `json:"created_at"`
+	UpdatedAt   time.Time  `json:"updated_at"`
 }
 
 func (s *Service) ListService(ctx context.Context, request *ListServiceRequest) ([]*ListServiceResponse, *base.ResponsePaginate, error) {
@@ -41,10 +41,15 @@ func (s *Service) ListService(ctx context.Context, request *ListServiceRequest) 
 
 	var response []*ListServiceResponse
 	for _, v := range data {
+		var classroomIDPtr *uuid.UUID
+		if v.ClassroomID != uuid.Nil {
+			classroomIDPtr = &v.ClassroomID
+		}
+
 		response = append(response, &ListServiceResponse{
 			ID:          v.ID,
 			SchoolID:    v.SchoolID,
-			ClassroomID: v.ClassroomID,
+			ClassroomID: classroomIDPtr,
 			PrefixID:    v.PrefixID,
 			GenderID:    v.GenderID,
 			StudentCode: v.StudentCode,
