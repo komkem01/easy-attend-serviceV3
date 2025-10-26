@@ -35,6 +35,7 @@ type TeacherEntity interface {
 	CreateTeacher(ctx context.Context, req *entitiesdto.TeacherCreateRequest) (*ent.TeacherEntity, error)
 	GetListTeacher(ctx context.Context) ([]*ent.TeacherEntity, error)
 	GetByIDTeacher(ctx context.Context, id uuid.UUID) (*ent.TeacherEntity, error)
+	GetTeacherByEmail(ctx context.Context, email string) (*ent.TeacherEntity, error)
 	UpdateTeacher(ctx context.Context, id uuid.UUID, req *entitiesdto.TeacherUpdateRequest) (*ent.TeacherEntity, error)
 	DeleteTeacher(ctx context.Context, id uuid.UUID) error
 	CheckExistTeacher(ctx context.Context, id uuid.UUID) (bool, error)

@@ -5,6 +5,7 @@ import (
 	"net/http"
 
 	"github.com/easy-attend-serviceV3/app/modules"
+	"github.com/easy-attend-serviceV3/app/utils/auth"
 
 	"github.com/gin-gonic/gin"
 )
@@ -47,11 +48,18 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 	r.PATCH("/student/:id", mod.Student.Ctl.UpdateController)
 	r.DELETE("/student/:id", mod.Student.Ctl.DeleteController)
 
-	// Teacher routes
-	r.GET("/teacher", mod.Teacher.Ctl.ListController)
-	r.GET("/teacher/:id", mod.Teacher.Ctl.InfoController)
-	r.POST("/teacher", mod.Teacher.Ctl.CreateController)
-	r.PATCH("/teacher/:id", mod.Teacher.Ctl.UpdateController)
-	r.DELETE("/teacher/:id", mod.Teacher.Ctl.DeleteController)
+	// Teacher routes - Public
+	r.POST("/teacher", mod.Teacher.Ctl.CreateController) // Registration
+	r.POST("/teacher/login", mod.Teacher.Ctl.Login)      // Login
+
+	// Teacher routes - Protected
+	teacherProtected := r.Group("/teacher")
+	teacherProtected.Use(auth.RequireAuth())
+	{
+		teacherProtected.GET("", mod.Teacher.Ctl.ListController)
+		teacherProtected.GET("/:id", mod.Teacher.Ctl.InfoController)
+		teacherProtected.PATCH("/:id", mod.Teacher.Ctl.UpdateController)
+		teacherProtected.DELETE("/:id", mod.Teacher.Ctl.DeleteController)
+	}
 
 }

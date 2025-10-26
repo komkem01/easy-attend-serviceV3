@@ -2,6 +2,7 @@ package entities
 
 import (
 	"context"
+	"time"
 
 	entitiesdto "github.com/easy-attend-serviceV3/app/modules/entities/dto"
 	"github.com/easy-attend-serviceV3/app/modules/entities/ent"
@@ -12,7 +13,11 @@ import (
 var _ entitiesinf.TeacherEntity = (*Service)(nil)
 
 func (s *Service) CreateTeacher(ctx context.Context, req *entitiesdto.TeacherCreateRequest) (*ent.TeacherEntity, error) {
+	// Generate new UUID for teacher
+	teacherID := uuid.New()
+
 	teacher := &ent.TeacherEntity{
+		ID:          teacherID,
 		SchoolID:    req.SchoolID,
 		ClassroomID: req.ClassroomID,
 		PrefixID:    req.PrefixID,
@@ -23,6 +28,8 @@ func (s *Service) CreateTeacher(ctx context.Context, req *entitiesdto.TeacherCre
 		Password:    req.Password,
 		Phone:       req.Phone,
 	}
+	teacher.CreatedAt = time.Now()
+	teacher.UpdatedAt = time.Now()
 
 	_, err := s.db.NewInsert().Model(teacher).Exec(ctx)
 	if err != nil {
@@ -61,6 +68,7 @@ func (s *Service) UpdateTeacher(ctx context.Context, id uuid.UUID, req *entities
 		Email:       req.Email,
 		Phone:       req.Phone,
 	}
+	teacher.UpdatedAt = time.Now()
 
 	_, err := s.db.NewUpdate().Model(teacher).Where("id = ?", id).Exec(ctx)
 	if err != nil {
@@ -80,4 +88,20 @@ func (s *Service) CheckExistTeacher(ctx context.Context, id uuid.UUID) (bool, er
 		return false, err
 	}
 	return count > 0, nil
+}
+
+// GetTeacherByEmail retrieves a teacher by email
+func (s *Service) GetTeacherByEmail(ctx context.Context, email string) (*ent.TeacherEntity, error) {
+	var teacher ent.TeacherEntity
+
+	err := s.db.NewSelect().
+		Model(&teacher).
+		Where("email = ? AND deleted_at IS NULL", email).
+		Scan(ctx)
+
+	if err != nil {
+		return nil, err
+	}
+
+	return &teacher, nil
 }
