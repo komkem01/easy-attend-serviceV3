@@ -62,6 +62,19 @@ func (s *Service) GetAllAttendance(ctx context.Context, limit int) ([]*ent.Atten
 	return attendances, nil
 }
 
+// GetAttendanceByTeacherID retrieves all attendance records for a specific teacher
+func (s *Service) GetAttendanceByTeacherID(ctx context.Context, teacherID uuid.UUID) ([]*ent.AttendanceEntity, error) {
+	var attendances []*ent.AttendanceEntity
+	err := s.db.NewSelect().
+		Model(&attendances).
+		Where("teacher_id = ?", teacherID).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return attendances, nil
+}
+
 // GetAttendanceByID retrieves an attendance record by ID
 func (s *Service) GetAttendanceByID(ctx context.Context, id uuid.UUID) (*ent.AttendanceEntity, error) {
 	var attendance ent.AttendanceEntity

@@ -21,6 +21,19 @@ func (s *Service) GetListClassroom(ctx context.Context) ([]*ent.ClassroomEntity,
 	return classrooms, nil
 }
 
+func (s *Service) GetClassroomsByTeacherID(ctx context.Context, teacherID uuid.UUID) ([]*ent.ClassroomEntity, error) {
+	var classrooms []*ent.ClassroomEntity
+	err := s.db.NewSelect().
+		Model(&classrooms).
+		Join("JOIN classroom_members cm ON classrooms.id = cm.classroom_id").
+		Where("cm.teacher_id = ?", teacherID).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return classrooms, nil
+}
+
 func (s *Service) GetByIDClassroom(ctx context.Context, id uuid.UUID) (*ent.ClassroomEntity, error) {
 	var classroom ent.ClassroomEntity
 	err := s.db.NewSelect().Model(&classroom).Where("id = ?", id).Scan(ctx)

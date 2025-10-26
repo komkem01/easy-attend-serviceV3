@@ -43,6 +43,19 @@ func (s *Service) GetListClassroomMember(ctx context.Context, classroomID uuid.U
 	return members, nil
 }
 
+// GetClassroomMembersByTeacherID retrieves all classroom members for a specific teacher
+func (s *Service) GetClassroomMembersByTeacherID(ctx context.Context, teacherID uuid.UUID) ([]*ent.ClassroomMemberEntity, error) {
+	var members []*ent.ClassroomMemberEntity
+	err := s.db.NewSelect().
+		Model(&members).
+		Where("teacher_id = ?", teacherID).
+		Scan(ctx)
+	if err != nil {
+		return nil, err
+	}
+	return members, nil
+}
+
 // GetClassroomMemberByID retrieves a classroom member by ID
 func (s *Service) GetClassroomMemberByID(ctx context.Context, id uuid.UUID) (*ent.ClassroomMemberEntity, error) {
 	var member ent.ClassroomMemberEntity

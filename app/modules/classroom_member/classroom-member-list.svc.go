@@ -10,6 +10,7 @@ import (
 type ListServiceRequest struct {
 	ClassroomID *uuid.UUID `json:"classroom_id,omitempty"`
 	StudentID   *uuid.UUID `json:"student_id,omitempty"`
+	UserID      uuid.UUID  `json:"-"` // Teacher ID from token context
 }
 
 type ListServiceResponse struct {
@@ -25,8 +26,36 @@ func (s *Service) ListService(ctx context.Context, req *ListServiceRequest) ([]*
 
 	var members []*ListServiceResponse
 
-	// If classroom ID is provided, get members by classroom
+	// If classroom ID is provided, get members by classroom (filtered by teacher)
 	if req.ClassroomID != nil {
+		// First verify if classroom exists
+		_, err := s.classroomDB.GetByIDClassroom(ctx, *req.ClassroomID)
+		if err != nil {
+			log.Errf("Failed to get classroom: %s", err)
+			return nil, err
+		}
+
+		// Check if teacher is associated with this classroom via classroom_members
+		teacherMembers, err := s.db.GetClassroomMembersByTeacherID(ctx, req.UserID)
+		if err != nil {
+			log.Errf("Failed to check teacher access: %s", err)
+			return nil, err
+		}
+
+		// Verify teacher has access to this classroom
+		hasAccess := false
+		for _, member := range teacherMembers {
+			if member.ClassroomID == *req.ClassroomID {
+				hasAccess = true
+				break
+			}
+		}
+
+		if !hasAccess {
+			log.Infof("Teacher %s does not have access to classroom %s", req.UserID, *req.ClassroomID)
+			return []*ListServiceResponse{}, nil // Return empty list
+		}
+
 		dbMembers, dbErr := s.db.GetListClassroomMember(ctx, *req.ClassroomID)
 		if dbErr != nil {
 			log.Error(dbErr)

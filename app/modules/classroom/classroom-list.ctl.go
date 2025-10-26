@@ -2,6 +2,7 @@ package classroom
 
 import (
 	"github.com/easy-attend-serviceV3/app/utils"
+	"github.com/easy-attend-serviceV3/app/utils/auth"
 	"github.com/easy-attend-serviceV3/app/utils/base"
 	"github.com/easy-attend-serviceV3/config/i18n"
 	"github.com/gin-gonic/gin"
@@ -30,8 +31,16 @@ func (c *Controller) ListController(ctx *gin.Context) {
 	}
 	span.AddEvent(`prefix.ctl.list.request`)
 
+	// Get user ID from token context
+	userID, err := auth.GetUserID(ctx)
+	if err != nil {
+		base.Unauthorized(ctx, "User not authenticated", nil)
+		return
+	}
+
 	data, _, err := c.svc.ListService(ctx, &ListServiceRequest{
 		RequestPaginate: req.RequestPaginate,
+		UserID:          userID,
 	})
 	if err != nil {
 		base.HandleError(ctx, err)

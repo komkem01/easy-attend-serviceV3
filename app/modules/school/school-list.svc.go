@@ -12,6 +12,7 @@ import (
 
 type ListServiceRequest struct {
 	base.RequestPaginate
+	UserID uuid.UUID `json:"-"` // User ID from token context
 }
 
 type ListServiceResponse struct {
@@ -27,9 +28,8 @@ func (s *Service) ListService(ctx context.Context, request *ListServiceRequest) 
 	span, log := utils.LogSpanFromContext(ctx)
 	span.AddEvent(`school.svc.list.start`)
 
-	// Note: Current entity interface doesn't support pagination yet
-	// For now, we'll get all schools and apply pagination manually
-	data, err := s.db.GetListSchool(ctx)
+	// Get schools filtered by teacher ID (user from token)
+	data, err := s.db.GetSchoolsByTeacherID(ctx, request.UserID)
 	if err != nil {
 		log.With(slog.Any(`body`, request)).Errf(`internal: %s`, err)
 		return nil, nil, err
