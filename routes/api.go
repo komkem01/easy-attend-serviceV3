@@ -40,4 +40,18 @@ func api(r *gin.RouterGroup, mod *modules.Modules) {
 	r.PATCH("/classroom/:id", mod.Classroom.Ctl.UpdateController)
 	r.DELETE("/classroom/:id", mod.Classroom.Ctl.DeleteController)
 
+	// Student routes
+	r.GET("/student", mod.Student.Ctl.ListController)
+	r.GET("/student/:id", mod.Student.Ctl.InfoController)
+	r.POST("/student", mod.Student.Ctl.CreateController)
+	r.PATCH("/student/:id", mod.Student.Ctl.UpdateController)
+	r.DELETE("/student/:id", mod.Student.Ctl.DeleteController)
+
+	// Teacher routes
+	r.GET("/teacher", mod.Teacher.Ctl.ListController)
+	r.GET("/teacher/:id", mod.Teacher.Ctl.InfoController)
+	r.POST("/teacher", mod.Teacher.Ctl.CreateController)
+	r.PATCH("/teacher/:id", mod.Teacher.Ctl.UpdateController)
+	r.DELETE("/teacher/:id", mod.Teacher.Ctl.DeleteController)
+
 }

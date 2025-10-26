@@ -3,6 +3,7 @@ package entitiesinf
 import (
 	"context"
 
+	entitiesdto "github.com/easy-attend-serviceV3/app/modules/entities/dto"
 	"github.com/easy-attend-serviceV3/app/modules/entities/ent"
 
 	"github.com/google/uuid"
@@ -22,10 +23,21 @@ type ExampleTwoEntity interface {
 
 // student
 type StudentEntity interface {
+	CreateStudent(ctx context.Context, req *entitiesdto.StudentCreateRequest) (*ent.StudentEntity, error)
+	GetListStudent(ctx context.Context, resp *entitiesdto.StudentListResponse) ([]*ent.StudentEntity, error)
+	GetStudentByID(ctx context.Context, id uuid.UUID, resp *entitiesdto.StudentInfoResponse) (*ent.StudentEntity, error)
+	UpdateStudent(ctx context.Context, id uuid.UUID, req *entitiesdto.StudentUpdateRequest) (*ent.StudentEntity, error)
+	DeleteStudent(ctx context.Context, id uuid.UUID) error
 }
 
 // teacher
 type TeacherEntity interface {
+	CreateTeacher(ctx context.Context, req *entitiesdto.TeacherCreateRequest) (*ent.TeacherEntity, error)
+	GetListTeacher(ctx context.Context) ([]*ent.TeacherEntity, error)
+	GetByIDTeacher(ctx context.Context, id uuid.UUID) (*ent.TeacherEntity, error)
+	UpdateTeacher(ctx context.Context, id uuid.UUID, req *entitiesdto.TeacherUpdateRequest) (*ent.TeacherEntity, error)
+	DeleteTeacher(ctx context.Context, id uuid.UUID) error
+	CheckExistTeacher(ctx context.Context, id uuid.UUID) (bool, error)
 }
 
 // prefix
