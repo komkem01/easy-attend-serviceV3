@@ -7,9 +7,18 @@ import (
 	"github.com/easy-attend-serviceV3/internal/otel/collector"
 )
 
+// JWTConfig contains JWT-related configuration
+type JWTConfig struct {
+	SecretKey            string
+	AccessTokenExpiry    int // in hours
+	RefreshTokenExpiry   int // in hours
+	Issuer              string
+}
+
 // Config is a struct that contains all the configuration of the application.
 type Config struct {
 	Database Database
+	JWT      JWTConfig
 
 	AppName      string
 	AppKey       string
@@ -37,6 +46,12 @@ type Config struct {
 var App = Config{
 	Database: database,
 	// Kafka:    kafka,
+	JWT: JWTConfig{
+		SecretKey:            "your-super-secret-jwt-key-change-this-in-production",
+		AccessTokenExpiry:    24,   // 24 hours
+		RefreshTokenExpiry:   168,  // 7 days (24 * 7)
+		Issuer:              "easy-attend-service",
+	},
 
 	AppName: "go_app",
 	Port:    8080,

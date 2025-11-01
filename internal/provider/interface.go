@@ -3,7 +3,6 @@ package provider
 import (
 	"context"
 	"errors"
-	"fmt"
 	"reflect"
 	"sort"
 	"strconv"
@@ -71,7 +70,6 @@ func close(ctx context.Context, in Config) error {
 		vvv, ok := field.Elem().Interface().(Close)
 		if ok && vvv != nil {
 			if errClose := vvv.Close(ctx); errClose != nil {
-				fmt.Println(err)
 				err = errors.Join(err, errClose)
 			}
 		}

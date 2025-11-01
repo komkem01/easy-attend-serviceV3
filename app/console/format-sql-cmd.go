@@ -1407,11 +1407,6 @@ func formatSQLFileFromLines(filePath string, lines []string, overwrite bool) err
 		return writeToFile(filePath, formatted)
 	}
 
-	// Print to stdout
-	for _, line := range formatted {
-		fmt.Println(line)
-	}
-
 	return nil
 }
 

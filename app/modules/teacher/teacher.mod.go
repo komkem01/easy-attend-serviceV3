@@ -2,6 +2,7 @@ package teacher
 
 import (
 	entitiesinf "github.com/easy-attend-serviceV3/app/modules/entities/inf"
+	"github.com/easy-attend-serviceV3/config"
 
 	"go.opentelemetry.io/otel"
 	"go.opentelemetry.io/otel/trace"
@@ -14,6 +15,7 @@ type Module struct {
 type (
 	Service struct {
 		tracer      trace.Tracer
+		config      *config.Config
 		db          entitiesinf.TeacherEntity
 		dbSchool    entitiesinf.SchoolEntity
 		dbClassroom entitiesinf.ClassroomEntity
@@ -27,8 +29,8 @@ type (
 )
 
 type Options struct {
-	// *configDTO.Config[Config]
 	tracer      trace.Tracer
+	config      *config.Config
 	db          entitiesinf.TeacherEntity
 	dbSchool    entitiesinf.SchoolEntity
 	dbClassroom entitiesinf.ClassroomEntity
@@ -36,11 +38,11 @@ type Options struct {
 	dbGender    entitiesinf.GenderEntity
 }
 
-func New(db entitiesinf.TeacherEntity, dbSchool entitiesinf.SchoolEntity, dbClassroom entitiesinf.ClassroomEntity, dbPrefix entitiesinf.PrefixEntity, dbGender entitiesinf.GenderEntity) *Module {
+func New(conf *config.Config, db entitiesinf.TeacherEntity, dbSchool entitiesinf.SchoolEntity, dbClassroom entitiesinf.ClassroomEntity, dbPrefix entitiesinf.PrefixEntity, dbGender entitiesinf.GenderEntity) *Module {
 	tracer := otel.Tracer("easy-attend-serviceV3.modules.teacher")
 	svc := newService(&Options{
-		// Config: conf,
 		tracer:      tracer,
+		config:      conf,
 		db:          db,
 		dbSchool:    dbSchool,
 		dbClassroom: dbClassroom,
@@ -56,6 +58,7 @@ func New(db entitiesinf.TeacherEntity, dbSchool entitiesinf.SchoolEntity, dbClas
 func newService(opt *Options) *Service {
 	return &Service{
 		tracer:      opt.tracer,
+		config:      opt.config,
 		db:          opt.db,
 		dbSchool:    opt.dbSchool,
 		dbClassroom: opt.dbClassroom,

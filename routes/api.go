@@ -16,8 +16,9 @@ func WarpH(router *gin.RouterGroup, prefix string, handler http.Handler) {
 
 func api(r *gin.RouterGroup, mod *modules.Modules) {
 	// Public routes (no authentication required)
-	r.POST("/teacher", mod.Teacher.Ctl.CreateController) // Registration
-	r.POST("/teacher/login", mod.Teacher.Ctl.Login)      // Login
+	r.POST("/teacher", mod.Teacher.Ctl.CreateController)       // Registration
+	r.POST("/teacher/login", mod.Teacher.Ctl.Login)            // Login
+	r.POST("/teacher/refresh", mod.Teacher.Ctl.RefreshController) // Refresh token
 
 	// Protected routes (authentication required)
 	protected := r.Group("")

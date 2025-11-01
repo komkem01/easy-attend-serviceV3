@@ -213,11 +213,6 @@ func initProvider(conf *configdto.Config[Config]) func(context.Context) error {
 	otel.SetTextMapPropagator(propagation.NewCompositeTextMapPropagator(propagation.TraceContext{}, propagation.Baggage{}))
 	otel.SetErrorHandler(
 		func(debug bool) otel.ErrorHandlerFunc {
-			if debug {
-				return func(err error) {
-					fmt.Println("otel:", err)
-				}
-			}
 			return func(_ error) {
 				// do nothing
 			}

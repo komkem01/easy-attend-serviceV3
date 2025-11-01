@@ -109,7 +109,11 @@ func (s *Service) CreateService(ctx context.Context, req *CreateServiceRequest) 
 	}
 
 	// Generate tokens for the new teacher
-	tokenMgr := auth.NewTokenManager("your-secret-key-here") // TODO: Move to config
+	tokenMgr := auth.NewTokenManagerWithConfig(
+		s.config.JWT.SecretKey,
+		time.Duration(s.config.JWT.AccessTokenExpiry)*time.Hour,
+		time.Duration(s.config.JWT.RefreshTokenExpiry)*time.Hour,
+	)
 	tokens, err := tokenMgr.GenerateTokenPair(
 		teacher.ID,
 		teacher.Email,

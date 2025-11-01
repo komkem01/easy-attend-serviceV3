@@ -84,7 +84,7 @@ func modulesInit() {
 	studentMod := student.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
 	log.Infof("student module initialized")
 
-	teacherMod := teacher.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
+	teacherMod := teacher.New(confMod.Svc.Config(), entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
 	log.Infof("teacher module initialized")
 
 	attendanceMod := attendance.New(entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc, entitiesMod.Svc)
